@@ -1,39 +1,42 @@
 import random
 
-num_column = 5
-num_rows = 3
+num_column = 7
+num_rows = 4
 available_points = num_column * num_rows
-number_boats = 4
+number_boats = 7
 
-# Create a board with .
-board = [["." for x in range(num_column)] for y in range(num_rows)]
 
-# Get random place for boats
-boats_position = random.sample(range(1, available_points), number_boats)
+class Board:
+    """
+    """
+    def __init__(self,type):
+        self.type = type
+        self.board = [["." for x in range(num_column)] for y in range(num_rows)]
+        self.boats_position = random.sample(range(1, available_points), number_boats)
 
-print (boats_position)
+    def print_board(self): 
+        if self.type == "player":
+            for j in range(number_boats):
+                for i in range(num_rows):
+                    if self.boats_position[j] > (num_column*(i)) and self.boats_position[j] <= (num_column*(i+1)):
+                        self.board[i][self.boats_position[j]-num_column * i -1] = "B"
+            print ('\n'.join(' '.join(row) for row in self.board))
+        else:
+            print ('\n'.join(' '.join(row) for row in self.board))
 
-# Place the boats on the board
-for j in range(number_boats):
-    for i in range(num_rows):
-        if boats_position[j] > (num_column*(i)) and boats_position[j] <= (num_column*(i+1)):
-            board[i][boats_position[j]-num_column * i -1] = "U"
+playerboard = Board("player")
+print(playerboard.print_board())
+print(playerboard.boats_position)
 
-#Visualize the board
-print ('\n'.join(' '.join(row) for row in board))
+computerboard = Board("computer")
+print(computerboard.print_board())
+print(computerboard.boats_position)
 
-#username = input("Type in your name and press return: ")
-row_choice = int(input("type your row: "))
-column_choice = int(input("type your colum: "))
 
-choice = column_choice + (num_column * (row_choice-1))
 
-if choice in boats_position:
-    print("Touche")
-    board[row_choice-1][column_choice - 1] = "T"
-    print ('\n'.join(' '.join(row) for row in board))
 
-else:
-    print("A l'eau")
-    board[row_choice-1][column_choice - 1] = "E"
-    print ('\n'.join(' '.join(row) for row in board))
+
+
+
+
+
