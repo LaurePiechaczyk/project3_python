@@ -1,6 +1,6 @@
 import random
 
-num_column = 7
+num_column = 3
 num_rows = 4
 available_points = num_column * num_rows
 number_boats = 7
@@ -8,28 +8,46 @@ number_boats = 7
 
 class Board:
     """
+    It will print the board.
     """
-    def __init__(self,type):
+    def __init__(self, type):
         self.type = type
         self.board = [["." for x in range(num_column)] for y in range(num_rows)]
         self.boats_position = random.sample(range(1, available_points), number_boats)
+        
+    def print_board(self,touched_boats_position,missed_boats_position): 
 
-    def print_board(self): 
+        #Show boats only for players
         if self.type == "player":
             for j in range(number_boats):
                 for i in range(num_rows):
                     if self.boats_position[j] > (num_column*(i)) and self.boats_position[j] <= (num_column*(i+1)):
                         self.board[i][self.boats_position[j]-num_column * i -1] = "B"
-            print ('\n'.join(' '.join(row) for row in self.board))
-        else:
-            print ('\n'.join(' '.join(row) for row in self.board))
+            
+        #display Touched boat on all boards 
+        for j in range(len(touched_boats_position)):
+            for i in range(num_rows):
+                if touched_boats_position[j] > (num_column*(i)) and touched_boats_position[j] <= (num_column*(i+1)):
+                    self.board[i][touched_boats_position[j]-num_column * i -1] = "T"   
+        
+        #display missed on all boards
+        for j in range(len(missed_boats_position)):
+           for i in range(num_rows):
+                if missed_boats_position[j] > (num_column*(i)) and missed_boats_position[j] <= (num_column*(i+1)):
+                     self.board[i][missed_boats_position[j]-num_column * i -1] = "m"   
 
-
+        print("this is the" + self.type + "Board:")
+        print("this is the" + self.type + "boat position:")
+        print( self.boats_position )
+        print ('\n'.join(' '.join(row) for row in self.board))
+       
 
 def make_guess():
     player_row_choice = int(input("type your row: "))
     player_column_choice = int(input("type your colum: "))
     player_choice = player_column_choice + (num_column * (player_row_choice-1))
+    print("player choice:")
+    print(player_choice)
     return player_choice
 
 
@@ -38,46 +56,47 @@ def computer_guess():
     print (computer_choice)
     return computer_choice
 
-def check_guess(choice,boats_position,board):
+
+def check_guess(choice,boats_position):
     if choice in boats_position:
         print("Touche")
-        for i in range(num_rows):
-            if choice > (num_column*(i)) and choice <= (num_column*(i+1)):
-                    board[i][choice-num_column * i -1] = "T"
-        print ('\n'.join(' '.join(row) for row in board))
-    
+        return choice
+     
     else:
         print("A l'eau")
-        for i in range(num_rows):
-            if choice > (num_column*(i)) and choice <= (num_column*(i+1)):
-                    board[i][choice-num_column * i -1] = "m"
-        print ('\n'.join(' '.join(row) for row in board))
+        return 0
 
 
-def run_game():
-    """
-    run the game
-    """
+################
 
-    playerboard = Board("player")
-    print(playerboard.print_board())
-    print(playerboard.boats_position)
+computer_touched_boats_position = []
+player_touched_boats_position = []
+computer_missed_boats_position = []
+player_missed_boats_position = []
 
-    computerboard = Board("computer")   
-    print(computerboard.print_board())
-    print(computerboard.boats_position)
+playerboard = Board("player")
+computerboard = Board("computer") 
 
-    player_choice = make_guess()
-    player_go = check_guess (player_choice,computerboard.boats_position,computerboard.board)
-    computer_go = check_guess (computer_guess(),playerboard.boats_position,playerboard.board)
+# first time to show the grids
+print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
+print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
 
-    player_go = check_guess (player_choice,computerboard.boats_position,computerboard.board)
-    computer_go = check_guess (computer_guess(),playerboard.boats_position,playerboard.board)
+#this will have to be looped (while loop) until somebody won
+computer_touched_boats_position.append(check_guess (make_guess(),computerboard.boats_position))
+print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
 
-
-run_game()
+player_touched_boats_position.append(check_guess (computer_guess(),playerboard.boats_position))
+print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
 
 
+"""
+computer_touched_boats_position.append(check_guess (make_guess(),computerboard.boats_position))
+print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
+
+player_touched_boats_position.append(check_guess (computer_guess(),playerboard.boats_position))
+print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
+
+"""
 
 
 
