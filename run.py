@@ -17,25 +17,23 @@ class Board:
         
     def print_board(self,touched_boats_position,missed_boats_position): 
 
+        def place_data_in_board (what_to_place, what_to_write):
+            for j in range(len(what_to_place)):
+                for i in range(num_rows):
+                    if what_to_place[j] > (num_column*(i)) and what_to_place[j] <= (num_column*(i+1)):
+                        self.board[i][what_to_place[j]-num_column * i -1] = what_to_write
+
         #Show boats only for players
         if self.type == "player":
-            for j in range(number_boats):
-                for i in range(num_rows):
-                    if self.boats_position[j] > (num_column*(i)) and self.boats_position[j] <= (num_column*(i+1)):
-                        self.board[i][self.boats_position[j]-num_column * i -1] = "B"
-            
-        #display Touched boat on all boards 
-        for j in range(len(touched_boats_position)):
-            for i in range(num_rows):
-                if touched_boats_position[j] > (num_column*(i)) and touched_boats_position[j] <= (num_column*(i+1)):
-                    self.board[i][touched_boats_position[j]-num_column * i -1] = "T"   
-        
-        #display missed on all boards
-        for j in range(len(missed_boats_position)):
-           for i in range(num_rows):
-                if missed_boats_position[j] > (num_column*(i)) and missed_boats_position[j] <= (num_column*(i+1)):
-                     self.board[i][missed_boats_position[j]-num_column * i -1] = "m"   
+            place_data_in_board (self.boats_position, "B")
 
+        #display touched boats on all boards    
+        place_data_in_board (touched_boats_position, "T")
+
+        #display missed on all boards
+        place_data_in_board (missed_boats_position, "m")
+
+        #print
         print("this is the" + self.type + "Board:")
         print("this is the" + self.type + "boat position:")
         print( self.boats_position )
