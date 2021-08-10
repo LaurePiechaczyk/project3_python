@@ -45,8 +45,13 @@ def make_guess():
 
 def computer_guess():
     computer_choice = random.randint(1, available_points)
+
+    while computer_choice in player_touched_boats_position or computer_choice in player_missed_boats_position :
+        computer_choice = random.randint(1, available_points)
     print("computer choice:")
     print (computer_choice)
+    print(player_touched_boats_position)
+    print(player_missed_boats_position)
     return computer_choice
 
 def check_guess(choice,boats_position,xx_touched_boats_position,xx_missed_boats_position):
