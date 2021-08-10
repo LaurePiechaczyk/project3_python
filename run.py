@@ -26,43 +26,41 @@ class Board:
         #Show boats only for players
         if self.type == "player":
             place_data_in_board (self.boats_position, "B")
-
         #display touched boats on all boards    
         place_data_in_board (touched_boats_position, "T")
-
         #display missed on all boards
         place_data_in_board (missed_boats_position, "m")
 
         #print
-        print("this is the" + self.type + "Board:")
-        print("this is the" + self.type + "boat position:")
-        print( self.boats_position )
-        print ('\n'.join(' '.join(row) for row in self.board))
-       
+        #print("this is the" + self.type + "Board:")
+        #print("this is the" + self.type + "boat position:")
+        #print( self.boats_position )
+        print ('\n'.join(' '.join(row) for row in self.board))     
 
 def make_guess():
     player_row_choice = int(input("type your row: "))
     player_column_choice = int(input("type your colum: "))
     player_choice = player_column_choice + (num_column * (player_row_choice-1))
-    print("player choice:")
-    print(player_choice)
+    #print("player choice:")
+    #print(player_choice)
     return player_choice
 
 
 def computer_guess():
     computer_choice = random.randint(1, available_points)
+    print("computer choice:")
     print (computer_choice)
     return computer_choice
 
 
-def check_guess(choice,boats_position):
+def check_guess(choice,boats_position,xx_touched_boats_position,xx_missed_boats_position):
     if choice in boats_position:
         print("Touche")
-        return choice
+        return xx_touched_boats_position.append(choice)
      
     else:
-        print("A l'eau")
-        return 0
+        print("A l eau")
+        return xx_missed_boats_position.append(choice)
 
 
 ################
@@ -79,20 +77,35 @@ computerboard = Board("computer")
 print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
 print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
 
-#this will have to be looped (while loop) until somebody won
-computer_touched_boats_position.append(check_guess (make_guess(),computerboard.boats_position))
-print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
+#
+check_guess(make_guess(),computerboard.boats_position,computer_touched_boats_position,computer_missed_boats_position)
+check_guess(computer_guess(),playerboard.boats_position,player_touched_boats_position,player_missed_boats_position)
 
-player_touched_boats_position.append(check_guess (computer_guess(),playerboard.boats_position))
+print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
 print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
 
+#
+check_guess(make_guess(),computerboard.boats_position,computer_touched_boats_position,computer_missed_boats_position)
+check_guess(computer_guess(),playerboard.boats_position,player_touched_boats_position,player_missed_boats_position)
+
+print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
+print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
+
+#
+check_guess(make_guess(),computerboard.boats_position,computer_touched_boats_position,computer_missed_boats_position)
+check_guess(computer_guess(),playerboard.boats_position,player_touched_boats_position,player_missed_boats_position)
+
+print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
+print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
+
+#
+check_guess(make_guess(),computerboard.boats_position,computer_touched_boats_position,computer_missed_boats_position)
+check_guess(computer_guess(),playerboard.boats_position,player_touched_boats_position,player_missed_boats_position)
+
+print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
+print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
 
 """
-computer_touched_boats_position.append(check_guess (make_guess(),computerboard.boats_position))
-print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
-
-player_touched_boats_position.append(check_guess (computer_guess(),playerboard.boats_position))
-print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
 
 """
 
