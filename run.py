@@ -1,10 +1,10 @@
 import random
+import numpy as np
 
-num_column = 3
-num_rows = 4
+num_column = 5
+num_rows = 2
 available_points = num_column * num_rows
-number_boats = 7
-
+number_boats = 3
 
 class Board:
     """
@@ -34,17 +34,14 @@ class Board:
         #print
         #print("this is the" + self.type + "Board:")
         #print("this is the" + self.type + "boat position:")
-        #print( self.boats_position )
+        print( self.boats_position )
         print ('\n'.join(' '.join(row) for row in self.board))     
 
 def make_guess():
     player_row_choice = int(input("type your row: "))
     player_column_choice = int(input("type your colum: "))
     player_choice = player_column_choice + (num_column * (player_row_choice-1))
-    #print("player choice:")
-    #print(player_choice)
     return player_choice
-
 
 def computer_guess():
     computer_choice = random.randint(1, available_points)
@@ -52,16 +49,13 @@ def computer_guess():
     print (computer_choice)
     return computer_choice
 
-
 def check_guess(choice,boats_position,xx_touched_boats_position,xx_missed_boats_position):
     if choice in boats_position:
         print("Touche")
-        return xx_touched_boats_position.append(choice)
-     
+        return xx_touched_boats_position.append(choice) 
     else:
         print("A l eau")
         return xx_missed_boats_position.append(choice)
-
 
 ################
 
@@ -77,35 +71,37 @@ computerboard = Board("computer")
 print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
 print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
 
-#
-check_guess(make_guess(),computerboard.boats_position,computer_touched_boats_position,computer_missed_boats_position)
-check_guess(computer_guess(),playerboard.boats_position,player_touched_boats_position,player_missed_boats_position)
+#start the game and allow to guess
+def one_run():
+    check_guess(make_guess(),computerboard.boats_position,computer_touched_boats_position,computer_missed_boats_position)
+    check_guess(computer_guess(),playerboard.boats_position,player_touched_boats_position,player_missed_boats_position)
 
-print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
-print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
+    print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
+    print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
 
-#
-check_guess(make_guess(),computerboard.boats_position,computer_touched_boats_position,computer_missed_boats_position)
-check_guess(computer_guess(),playerboard.boats_position,player_touched_boats_position,player_missed_boats_position)
+while number_boats > len(computer_touched_boats_position) and number_boats > len(player_touched_boats_position):
+    one_run()
 
-print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
-print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
-
-#
-check_guess(make_guess(),computerboard.boats_position,computer_touched_boats_position,computer_missed_boats_position)
-check_guess(computer_guess(),playerboard.boats_position,player_touched_boats_position,player_missed_boats_position)
-
-print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
-print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
-
-#
-check_guess(make_guess(),computerboard.boats_position,computer_touched_boats_position,computer_missed_boats_position)
-check_guess(computer_guess(),playerboard.boats_position,player_touched_boats_position,player_missed_boats_position)
-
-print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
-print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
-
+if len(computer_touched_boats_position) > len(player_touched_boats_position):
+    print("You won")
+else:
+    print("Computer won")
 """
+one_run()
+one_run()
+one_run()
+print(computer_touched_boats_position)
+print(player_touched_boats_position)
+print(computer_missed_boats_position)
+print(player_missed_boats_position)
+
+dd=[1,2,3]
+ee=[2,1,3]
+ff= np.sort(ee)
+print(ff)
+print(np.array_equal(ee,ee))
+print(np.array_equal(np.sort(ee),dd))
+
 
 """
 
