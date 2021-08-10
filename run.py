@@ -1,10 +1,50 @@
 import random
 import numpy as np
 
+
+# present the game and welcome the player
+#name = input("What is your name player? ")
+#print(f'Welcome: {name}')
+
+######stqrt with customization
 num_column = 5
 num_rows = 2
-available_points = num_column * num_rows
 number_boats = 3
+
+constumisation = input ("do you want to choose your number of boats and grid size? Y/N \n" )
+
+def choose_grid(num_rows, num_column, number_boats ):
+    while True:   
+        try:
+            num_rows = int(input("type your number of rows: "))
+            while  num_rows > 13 or num_rows < 1 :
+                print("Please use a value between 1 and 12")
+                num_rows = int(input("type your number of rows: "))
+  
+            num_column = int(input("type your number of columns: "))
+            while num_column > 13 or num_column < 1:
+                print("Please use a value between 1 and 12")
+                num_column = int(input("type your number of column: "))
+
+            number_boats = int(input("type your number of boats: "))
+            while number_boats >= (num_rows * num_column) or number_boats < 1:
+                print("I think you have a bit toomuch boats (or no boat)")
+                number_boats = int(input("type your number of boats: "))
+            
+            return (num_rows, num_column, number_boats )
+
+            if type(num_rows, num_column, number_boats) == int :
+                break
+        except ValueError:
+            print("Both values have to be integers.")
+
+if constumisation in ["Y", "y","Yes", "yes"]:
+    num_rows, num_column, number_boats = choose_grid(num_rows, num_column , number_boats)
+
+available_points = num_column * num_rows
+
+
+##################
 
 class Board:
     """
@@ -48,10 +88,8 @@ def computer_guess():
 
     while computer_choice in player_touched_boats_position or computer_choice in player_missed_boats_position :
         computer_choice = random.randint(1, available_points)
-    print("computer choice:")
-    print (computer_choice)
-    print(player_touched_boats_position)
-    print(player_missed_boats_position)
+    #print("computer choice:")
+    #print (computer_choice)
     return computer_choice
 
 def check_guess(choice,boats_position,xx_touched_boats_position,xx_missed_boats_position):
@@ -92,13 +130,6 @@ if len(computer_touched_boats_position) > len(player_touched_boats_position):
 else:
     print("Computer won")
 """
-one_run()
-one_run()
-one_run()
-print(computer_touched_boats_position)
-print(player_touched_boats_position)
-print(computer_missed_boats_position)
-print(player_missed_boats_position)
 
 dd=[1,2,3]
 ee=[2,1,3]
