@@ -1,13 +1,11 @@
 import random
-import numpy as np
-
 
 # present the game and welcome the player
-#name = input("What is your name player? ")
-#print(f'Welcome: {name}')
+name = input("What is your name player? ")
+print(f'Welcome: {name}')
 
-######stqrt with customization
-num_column = 5
+######start with customization
+num_column = 2
 num_rows = 2
 number_boats = 3
 
@@ -40,6 +38,9 @@ def choose_grid(num_rows, num_column, number_boats ):
 
 if constumisation in ["Y", "y","Yes", "yes"]:
     num_rows, num_column, number_boats = choose_grid(num_rows, num_column , number_boats)
+else:
+     print("Fair enough, you will play with the default. Your boats are shown with @ and the computer had 5 hidden boats.")
+#print("this is the" + self.type + "Board:")
 
 available_points = num_column * num_rows
 
@@ -50,12 +51,17 @@ class Board:
     """
     It will print the board.
     """
-    def __init__(self, type):
+    def __init__(self, type, name):
         self.type = type
+        self.name = name
+
         self.board = [["." for x in range(num_column)] for y in range(num_rows)]
         self.boats_position = random.sample(range(1, available_points), number_boats)
+
+        self.touched_boats_position = [] #it comes when the other is playing because the adversaire ids trying to touch the boats
+        self.missed_boats_position = [] #it comes when the other is playing because the adversaire ids trying to touch the boats
         
-    def print_board(self,touched_boats_position,missed_boats_position): 
+    def print_board(self): 
 
         def place_data_in_board (what_to_place, what_to_write):
             for j in range(len(what_to_place)):
@@ -65,81 +71,66 @@ class Board:
 
         #Show boats only for players
         if self.type == "player":
-            place_data_in_board (self.boats_position, "B")
+            place_data_in_board (self.boats_position, "@")
         #display touched boats on all boards    
-        place_data_in_board (touched_boats_position, "T")
+        place_data_in_board (self.touched_boats_position, "T")
         #display missed on all boards
-        place_data_in_board (missed_boats_position, "m")
+        place_data_in_board (self.missed_boats_position, "m")
 
-        #print
-        #print("this is the" + self.type + "Board:")
-        #print("this is the" + self.type + "boat position:")
-        print( self.boats_position )
+        print(f'\n{self.name} board')
         print ('\n'.join(' '.join(row) for row in self.board))     
 
+
 def make_guess():
+    print("\nyour turn to play. Just try to hit the computer boats")
     player_row_choice = int(input("type your row: "))
     player_column_choice = int(input("type your colum: "))
     player_choice = player_column_choice + (num_column * (player_row_choice-1))
     return player_choice
 
 def computer_guess():
+    print("\nComputer turn to play")
     computer_choice = random.randint(1, available_points)
 
-    while computer_choice in player_touched_boats_position or computer_choice in player_missed_boats_position :
+    while computer_choice in playerboard.touched_boats_position or computer_choice in playerboard.missed_boats_position :
         computer_choice = random.randint(1, available_points)
     #print("computer choice:")
     #print (computer_choice)
     return computer_choice
 
-def check_guess(choice,boats_position,xx_touched_boats_position,xx_missed_boats_position):
+def check_guess(choice,boats_position,touched_boats_position,missed_boats_position):
     if choice in boats_position:
         print("Touche")
-        return xx_touched_boats_position.append(choice) 
+        return touched_boats_position.append(choice) 
     else:
         print("A l eau")
-        return xx_missed_boats_position.append(choice)
+        return missed_boats_position.append(choice)
 
 ################
 
-computer_touched_boats_position = []
-player_touched_boats_position = []
-computer_missed_boats_position = []
-player_missed_boats_position = []
 
-playerboard = Board("player")
-computerboard = Board("computer") 
+playerboard = Board("player",name)
+computerboard = Board("computer","computer") 
 
 # first time to show the grids
-print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
-print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
+print("\nhere is an overview of your bord. Your boats are represented by @.\nWhen you play, T = touched and m = missed.\nGood luck and have fun :)")
+playerboard.print_board()
 
-#start the game and allow to guess
 def one_run():
-    check_guess(make_guess(),computerboard.boats_position,computer_touched_boats_position,computer_missed_boats_position)
-    check_guess(computer_guess(),playerboard.boats_position,player_touched_boats_position,player_missed_boats_position)
+    check_guess(make_guess(),computerboard.boats_position,computerboard.touched_boats_position,computerboard.missed_boats_position)
+    computerboard.print_board()
 
-    print(playerboard.print_board(player_touched_boats_position  , player_missed_boats_position))
-    print(computerboard.print_board(computer_touched_boats_position , computer_missed_boats_position))
+    check_guess(computer_guess(),playerboard.boats_position,playerboard.touched_boats_position,playerboard.missed_boats_position)
+    playerboard.print_board()
 
-while number_boats > len(computer_touched_boats_position) and number_boats > len(player_touched_boats_position):
+while number_boats > len(computerboard.touched_boats_position) and number_boats > len(playerboard.touched_boats_position):
     one_run()
 
-if len(computer_touched_boats_position) > len(player_touched_boats_position):
-    print("You won")
+if len(computerboard.touched_boats_position) > len(playerboard.touched_boats_position):
+    print("\nComputer won")
 else:
-    print("Computer won")
-"""
+    print("\nYou won")
 
-dd=[1,2,3]
-ee=[2,1,3]
-ff= np.sort(ee)
-print(ff)
-print(np.array_equal(ee,ee))
-print(np.array_equal(np.sort(ee),dd))
-
-
-"""
 
 
 
