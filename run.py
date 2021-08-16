@@ -11,16 +11,12 @@ class Board:
         self.boats_position = random.sample(range(1, available_points+1), number_boats)
         self.touched_boats_position = [] #it comes when the other is playing because the adversaire ids trying to touch the boats
         self.missed_boats_position = [] #it comes when the other is playing because the adversaire ids trying to touch the boats
-  
-    def print_board(self): 
-        def place_data_in_board (what_to_place, what_to_write):
-            for i in range(len(what_to_place)):
-                self.array[what_to_place[i]-1] = what_to_write
 
+    def print_board(self): 
         if self.type == "player":
-            place_data_in_board (self.boats_position, "@")
-        place_data_in_board (self.touched_boats_position, "T")
-        place_data_in_board (self.missed_boats_position, "m")
+            place_data_in_board (self.array, self.boats_position, "@")
+        place_data_in_board (self.array, self.touched_boats_position, "T")
+        place_data_in_board (self.array, self.missed_boats_position, "m") 
 
         self.board = np.reshape(self.array, (num_rows, num_column)) #reshape the array into a matrix
         print(f'\n{self.name} board')
@@ -59,6 +55,10 @@ def choose_grid(num_rows, num_column, number_boats ):
                 break
         except ValueError:
             print("Both values have to be integers.")
+
+def place_data_in_board (array_to_populate, what_to_place, what_to_write):
+    for i in range(len(what_to_place)):
+        array_to_populate[what_to_place[i]-1] = what_to_write
 
 def make_guess():
     print("\nYour turn to play")
