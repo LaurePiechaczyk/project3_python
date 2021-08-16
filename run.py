@@ -1,15 +1,5 @@
 import random
-
-# present the game and welcome the player
-name = input("What is your name player? ")
-print(f'Welcome: {name}')
-
-######start with customization
-num_column = 2
-num_rows = 2
-number_boats = 3
-
-constumisation = input ("do you want to choose your number of boats and grid size? Y/N \n" )
+import numpy as np
 
 def choose_grid(num_rows, num_column, number_boats ):
     while True:   
@@ -35,14 +25,6 @@ def choose_grid(num_rows, num_column, number_boats ):
                 break
         except ValueError:
             print("Both values have to be integers.")
-
-if constumisation in ["Y", "y","Yes", "yes"]:
-    num_rows, num_column, number_boats = choose_grid(num_rows, num_column , number_boats)
-else:
-     print("Fair enough, you will play with the default. Your boats are shown with @ and the computer had 5 hidden boats.")
-#print("this is the" + self.type + "Board:")
-
-available_points = num_column * num_rows
 
 
 ##################
@@ -82,10 +64,11 @@ class Board:
 
 
 def make_guess():
-    print("\nyour turn to play. Just try to hit the computer boats")
-    player_row_choice = int(input("type your row: "))
-    player_column_choice = int(input("type your colum: "))
+    print("\nYour turn to play")
+    player_row_choice = int(input("Enter a row number: "))
+    player_column_choice = int(input("Enter a your colum: "))
     player_choice = player_column_choice + (num_column * (player_row_choice-1))
+    print(f'Player guessed: ({player_row_choice };{player_column_choice})')
     return player_choice
 
 def computer_guess():
@@ -94,34 +77,70 @@ def computer_guess():
 
     while computer_choice in playerboard.touched_boats_position or computer_choice in playerboard.missed_boats_position :
         computer_choice = random.randint(1, available_points)
-    #print("computer choice:")
-    #print (computer_choice)
+    #get the corresponding row and column
+    computer_row_choice = np.where(matrix_game == computer_choice)[0][0]+1
+    computer_column_choice = np.where(matrix_game == computer_choice)[1][0]+1
+    
+    print(f'computer guessed: ({computer_row_choice};{computer_column_choice}) ')
     return computer_choice
 
 def check_guess(choice,boats_position,touched_boats_position,missed_boats_position):
     if choice in boats_position:
-        print("Touche")
+        print("A ship has been touched")
         return touched_boats_position.append(choice) 
     else:
-        print("A l eau")
+        print("ships have been missed this time")
         return missed_boats_position.append(choice)
 
 ################
 
+def one_run():
+    check_guess(make_guess(),computerboard.boats_position,computerboard.touched_boats_position,computerboard.missed_boats_position)
+    check_guess(computer_guess(),playerboard.boats_position,playerboard.touched_boats_position,playerboard.missed_boats_position)
+
+    print("-" * 35)
+    print("after this round the score is: ")
+    print("-" * 35)
+    print(input("enter any key to continue or n to quit"))
+
+    playerboard.print_board()
+    computerboard.print_board()
+
+# present the game and welcome the player
+print("-" * 35)
+print("Welcome to ULTIMATE BATTLESHIPS!!")
+print("-" * 35)
+
+name = input("Please enter your name: \n")
+
+######start with customization
+num_column = 2
+num_rows = 2
+number_boats = 3
+
+constumisation = input (f'Hello {name}, do you want to choose your number of ships and grid size? Y/N \n' )
+
+if constumisation in ["Y", "y","Yes", "yes"]:
+    num_rows, num_column, number_boats = choose_grid(num_rows, num_column , number_boats)
+
+print("-" * 35)
+print(f"Board size: number rows = {num_rows}, number columns = {num_column}, Number of ships: {number_boats}")
+print("top left corner is row: 1, col:1")
+print("-" * 35)
+
+available_points = num_column * num_rows
+array_game = np.arange(available_points) 
+print (array_game)
+matrix_game = np.reshape(array_game, (num_rows, num_column))
+print (matrix_game)
 
 playerboard = Board("player",name)
 computerboard = Board("computer","computer") 
 
 # first time to show the grids
-print("\nhere is an overview of your bord. Your boats are represented by @.\nWhen you play, T = touched and m = missed.\nGood luck and have fun :)")
+#print("\nhere is an overview of your bord. Your boats are represented by @.\nWhen you play, T = touched and m = missed.\nGood luck and have fun :)")
 playerboard.print_board()
-
-def one_run():
-    check_guess(make_guess(),computerboard.boats_position,computerboard.touched_boats_position,computerboard.missed_boats_position)
-    computerboard.print_board()
-
-    check_guess(computer_guess(),playerboard.boats_position,playerboard.touched_boats_position,playerboard.missed_boats_position)
-    playerboard.print_board()
+computerboard.print_board()
 
 while number_boats > len(computerboard.touched_boats_position) and number_boats > len(playerboard.touched_boats_position):
     one_run()
@@ -130,10 +149,5 @@ if len(computerboard.touched_boats_position) > len(playerboard.touched_boats_pos
     print("\nComputer won")
 else:
     print("\nYou won")
-
-
-
-
-
 
 
