@@ -7,26 +7,22 @@ class Board:
     """
     def __init__(self, type):
         self.type = type
-        self.board = [["." for x in range(num_column)] for y in range(num_rows)]
+        self.array = ["." for x in range(1,available_points+1)]
         self.boats_position = random.sample(range(1, available_points+1), number_boats)
         self.touched_boats_position = [] #it comes when the other is playing because the adversaire ids trying to touch the boats
         self.missed_boats_position = [] #it comes when the other is playing because the adversaire ids trying to touch the boats
-        
+  
     def print_board(self): 
         def place_data_in_board (what_to_place, what_to_write):
-            for j in range(len(what_to_place)):
-                for i in range(num_rows):
-                    if what_to_place[j] > (num_column*(i)) and what_to_place[j] <= (num_column*(i+1)):
-                        self.board[i][what_to_place[j]-num_column * i -1] = what_to_write
+            for i in range(len(what_to_place)):
+                self.array[what_to_place[i]-1] = what_to_write
 
-        #Show boats only for players
         if self.type == "player":
             place_data_in_board (self.boats_position, "@")
-        #display touched boats on all boards    
         place_data_in_board (self.touched_boats_position, "T")
-        #display missed on all boards
         place_data_in_board (self.missed_boats_position, "m")
 
+        self.board = np.reshape(self.array, (num_rows, num_column)) #reshape the array into a matrix
         print(f'\n{self.name} board')
         print ('\n'.join(' '.join(row) for row in self.board))  
 
@@ -105,6 +101,7 @@ def one_run():
 
     player.print_board()
     computer.print_board()
+
 
 # present the game and welcome the player
 print("-" * 35)
