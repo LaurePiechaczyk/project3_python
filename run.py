@@ -33,20 +33,20 @@ class Player(Board):
 def choose_grid(num_rows, num_column, number_boats ):
     while True:   
         try:
-            num_rows = int(input("type your number of rows: "))
+            num_rows = int(input("type your number of rows:\n"))
             while  num_rows > 13 or num_rows < 1 :
                 print("Please use a value between 1 and 13")
-                num_rows = int(input("type your number of rows: "))
+                num_rows = int(input("type your number of rows:\n"))
   
-            num_column = int(input("type your number of columns: "))
+            num_column = int(input("type your number of columns:\n"))
             while num_column > 13 or num_column < 1:
                 print("Please use a value between 1 and 13")
-                num_column = int(input("type your number of column: "))
+                num_column = int(input("type your number of column:\n"))
 
-            number_boats = int(input("type your number of boats: "))
+            number_boats = int(input("type your number of boats:\n"))
             while number_boats > (num_rows * num_column) or number_boats < 1:
-                print("I think you have a bit toomuch boats (or no boat)")
-                number_boats = int(input("type your number of boats: "))
+                print("You might have a bit too much boats (or no boat)")
+                number_boats = int(input("type your number of boats:\n"))
             
             return (num_rows, num_column, number_boats )
 
@@ -73,8 +73,8 @@ def show_score():
 def input_player_guess():
     while True:   
         try:
-            player_row_choice = int(input("Enter a row number: "))
-            player_column_choice = int(input("Enter a column number: "))
+            player_row_choice = int(input("Enter a row number:\n"))
+            player_column_choice = int(input("Enter a column number:\n"))
             if player_row_choice in range(1,num_rows+1)  and player_column_choice in range(1,num_column+1):
                 break
             else:
@@ -152,7 +152,7 @@ print("-" * 55)
 print("Welcome to ULTIMATE BATTLESHIPS!!")
 print("-" * 55)
 
-name = input("Please enter your name: \n")
+name = input("Please enter your name:\n")
 
 ######start with customization
 num_column = 2
