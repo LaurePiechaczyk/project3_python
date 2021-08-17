@@ -96,7 +96,7 @@ def make_guess():
         player_row_choice, player_column_choice = input_player_guess()
         player_choice = player_column_choice + (num_column * (player_row_choice-1))
 
-    print(f'Player guessed: ({player_row_choice };{player_column_choice})')
+    print(f'{name} guessed: ({player_row_choice };{player_column_choice})')
     return player_choice
 
 def computer_guess():
@@ -109,7 +109,7 @@ def computer_guess():
     #get the corresponding row and column
     computer_row_choice = np.where(matrix_game == computer_choice)[0][0]+1
     computer_column_choice = np.where(matrix_game == computer_choice)[1][0]+1
-    print(f'computer guessed: ({computer_row_choice};{computer_column_choice})')
+    print(f'Computer guessed: ({computer_row_choice};{computer_column_choice})')
     return computer_choice
 
 def check_if_winner():
