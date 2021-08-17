@@ -35,12 +35,12 @@ def choose_grid(num_rows, num_column, number_boats ):
         try:
             num_rows = int(input("type your number of rows: "))
             while  num_rows > 13 or num_rows < 1 :
-                print("Please use a value between 1 and 12")
+                print("Please use a value between 1 and 13")
                 num_rows = int(input("type your number of rows: "))
   
             num_column = int(input("type your number of columns: "))
             while num_column > 13 or num_column < 1:
-                print("Please use a value between 1 and 12")
+                print("Please use a value between 1 and 13")
                 num_column = int(input("type your number of column: "))
 
             number_boats = int(input("type your number of boats: "))
@@ -53,32 +53,41 @@ def choose_grid(num_rows, num_column, number_boats ):
             if type(num_rows, num_column, number_boats) == int :
                 break
         except ValueError:
-            print("Both values have to be integers.")
+            print("Values have to be integers.")
 
 def place_data_in_board (array_to_populate, what_to_place, what_to_write):
     for i in range(len(what_to_place)):
         array_to_populate[what_to_place[i]-1] = what_to_write
 
 def show_games_settings():
-    print("-" * 35)
-    print(f"Board size: number rows = {num_rows}, number columns = {num_column}, Number of ships: {number_boats}")
-    print("top left corner is row: 1, col:1")
-    print("-" * 35)
+    print("-" * 55)
+    print(f"The settingds are: \nNumber of rows = {num_rows} \nNumber of columns = {num_column} \nNumber of ships: {number_boats}")
+    print("Top left corner is row: 1, col: 1")
+    print("-" * 55)
 
 def show_score():
-    print("-" * 35)
+    print("-" * 55)
     print(f'The score is:\n{name}:{len(computer.touched_boats_position)} \nComputer:{len(player.touched_boats_position)} ')
-    print("-" * 35)
+    print("-" * 55)
 
 def input_player_guess():
-    player_row_choice = int(input("Enter a row number: "))
-    player_column_choice = int(input("Enter a your colum: "))
-    return player_row_choice,player_column_choice
+    while True:   
+        try:
+            player_row_choice = int(input("Enter a row number: "))
+            player_column_choice = int(input("Enter a column number: "))
+            if player_row_choice in range(1,num_rows+1)  and player_column_choice in range(1,num_column+1):
+                break
+            else:
+                print("\nPlease enter correct values")
+                show_games_settings()
 
+        except ValueError:
+            print("\nPlease enter correct values")
+            show_games_settings()
+    return player_row_choice,player_column_choice
 
 def make_guess():
     print("\nYour turn to play")
-
     player_row_choice, player_column_choice = input_player_guess()
     player_choice = player_column_choice + (num_column * (player_row_choice-1))
     
@@ -131,7 +140,7 @@ def one_run():
 
     show_score()
 
-    next_round_start = (input("enter to continue or n + enter to quit\n"))
+    next_round_start = (input("Click Enter to continue or n + Enter to quit\n"))
     if next_round_start in ["N", "n","No", "no"]:
         quit()
     player.print_board()
@@ -139,9 +148,9 @@ def one_run():
 
 
 # present the game and welcome the player
-print("-" * 35)
+print("-" * 55)
 print("Welcome to ULTIMATE BATTLESHIPS!!")
-print("-" * 35)
+print("-" * 55)
 
 name = input("Please enter your name: \n")
 
@@ -150,7 +159,7 @@ num_column = 2
 num_rows = 2
 number_boats = 3
 
-constumisation = input (f'Hello {name}, do you want to choose your number of ships and grid size? Y/N \n' )
+constumisation = input (f'Hello {name}, do you want to choose your number of ships and grid size? \nClick Y + Enter \nOtherwise click Enter to play with the default\n' )
 
 if constumisation in ["Y", "y","Yes", "yes"]:
     num_rows, num_column, number_boats = choose_grid(num_rows, num_column , number_boats)
@@ -165,13 +174,13 @@ player = Player(name,"player")
 computer = Player("computer","computer") 
 
 # first time to show the grids
-#print("\nhere is an overview of your bord. Your boats are represented by @.\nWhen you play, T = touched and m = missed.\nGood luck and have fun :)")
+print("-" * 55)
+print("Your boats are represented by @.\nT = touched ships \nm = missed.\nGood luck and have fun :)")
+print("-" * 55)
 player.print_board()
 computer.print_board()
 
 while number_boats > len(computer.touched_boats_position) and number_boats > len(player.touched_boats_position):
     one_run()
-
-
 
  
