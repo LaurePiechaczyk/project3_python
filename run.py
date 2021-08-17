@@ -155,9 +155,9 @@ print("-" * 55)
 name = input("Please enter your name:\n")
 
 ######start with customization
-num_column = 2
-num_rows = 2
-number_boats = 3
+num_column = 5
+num_rows = 4
+number_boats = 6
 
 constumisation = input (f'Hello {name}, do you want to choose your number of ships and grid size? \nClick Y + Enter \nOtherwise click Enter to play with the default\n' )
 
