@@ -23,8 +23,9 @@ class Board:
         print ('\n'.join(' '.join(row) for row in self.board))  
 
 
-class Player(Board):
+class GameParticipant(Board):
     """
+    GameParticipant Class 
     """
     def __init__(self, name, type):
         self.name = name
@@ -192,8 +193,8 @@ matrix_game = np.reshape(array_game, (num_rows, num_column))
 
 
 # Using the classes to set a player and a computer
-player = Player(name,"player")
-computer = Player("computer","computer") 
+player = GameParticipant(name,"player")
+computer = GameParticipant("computer","computer") 
 
 
 # first time to show the grids

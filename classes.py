@@ -1,3 +1,5 @@
+from run import *
+
 class Board:
     """
     It will print the board.
@@ -22,6 +24,7 @@ class Board:
 
 class Player(Board):
     """
+    Player Class 
     """
     def __init__(self, name, type):
         self.name = name
