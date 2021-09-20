@@ -35,7 +35,7 @@ def show_games_settings():
 
 def show_score():
     print("-" * 55)
-    print(f'The score is:\n{name}:{len(computer.touched_boats_position)} \nComputer:{len(player.touched_boats_position)} ')
+    print(f'The score is:\n{name}:{len(player_score)} \nComputer:{len(computer_score)} ')
     print("-" * 55)
 
 def input_player_guess():
@@ -59,7 +59,7 @@ def make_guess():
     player_row_choice, player_column_choice = input_player_guess()
     player_choice = player_column_choice + (num_column * (player_row_choice-1))
     
-    while player_choice in computer.touched_boats_position or player_choice in computer.missed_boats_position :
+    while player_choice in player_score or player_choice in computer.missed_boats_position :
         print("You have already tried this coordinates")
         player_row_choice, player_column_choice = input_player_guess()
         player_choice = player_column_choice + (num_column * (player_row_choice-1))
@@ -70,7 +70,7 @@ def make_guess():
 def computer_guess():
     print("\nComputer turn to play")
     computer_choice = random.randint(1, available_points) # with random.randint we don't add +1 at available_points as for random.sample because with random.randint the last number can be choosen
-    all_trials = player.touched_boats_position + player.missed_boats_position
+    all_trials = computer_score + player.missed_boats_position
     while computer_choice in previous_trials:
         computer_choice = random.randint(1, available_points) # with random.randint we don't add +1 at available_points as for random.sample because with random.randint the last number can be choosen
 
@@ -81,8 +81,8 @@ def computer_guess():
     return computer_choice
 
 def check_if_winner():
-    if len(computer.touched_boats_position) == number_boats or len(player.touched_boats_position) == number_boats:
-        if len(computer.touched_boats_position) > len(player.touched_boats_position):
+    if len(player_score) == number_boats or len(computer_score) == number_boats:
+        if len(player_score) > len(computer_score):
             show_score()
             print("\nYou won")
             quit()
@@ -100,10 +100,10 @@ def check_guess(choice,boats_position,touched_boats_position,missed_boats_positi
         return missed_boats_position.append(choice)
 
 def one_run():
-    check_guess(make_guess(),computer.boats_position,computer.touched_boats_position,computer.missed_boats_position)
+    check_guess(make_guess(),computer.boats_position,player_score,computer.missed_boats_position)
     check_if_winner()
 
-    check_guess(computer_guess(),player.boats_position,player.touched_boats_position,player.missed_boats_position)
+    check_guess(computer_guess(),player.boats_position,computer_score,player.missed_boats_position)
     check_if_winner()
 
     show_score()
