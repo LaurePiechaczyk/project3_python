@@ -21,7 +21,7 @@ class Board:
             place_data_in_board(self.array, self.boats_position, "@")
         place_data_in_board(self.array, self.touched_boats_position, "T")
         place_data_in_board(self.array, self.missed_boats_position, "m")
-
+        
         # reshape the array into a matrix
         self.board = np.reshape(self.array, (num_rows, num_column))
         print(f'\n{self.name} board')
