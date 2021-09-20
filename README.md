@@ -51,7 +51,7 @@ The player and the computer make guess one after the other and the winner is the
 - Give the scores
 - Input validation and error-checking
     - Maximum board size is set
-    - More boats than the board size could handle is invalide
+    - More boats than the board size could handle is invalid
     - the same guess cannot be entered twice (for the player and the computer)
 
 ## Features left to implement
@@ -64,11 +64,11 @@ The player and the computer make guess one after the other and the winner is the
 - The class Board saves:
     - The type of board with can be Player or Computer
     - The ships position in an array
-    - The touched ship position in an array
-    - The missed ship position in an array
-    - A function to print the board that displays the ships (only for the player board), the touched ships and the missed ships.
+    - The touched ship positions in an array
+    - The missed ship positions in an array
+    - A function to print the board that displays the ships (only for the player board)
 - The class GameParticipant:
-    - Inherits the board
+    - Inherits the class Board
     - Saves the name
     - For future features it could store more data about each player
 
@@ -113,12 +113,21 @@ The project was deployed on Heroku after registering for an account
 
 # Credits
 ## Idea credits
-The Idea to create 
+The Idea to create from the project example Idea suggested by code institute for the creation of the project. 
 
 ## Code credits
 - ### General
-- ### Game credit
+[code institute](https://codeinstitute.net/) - Parts of the code throughout the website have been adapted from the courses.
+
+[w3schools](https://www.w3schools.com/) - Used throughout the project.
+
+[stakocverflow](https://stakocverflow.com/) - Used throughout the project.
+
+- ### Game code credit
+A video made by [code institute](https://codeinstitute.net/) that illustrates a similar project has been used for inspiration for the code. The video does not show the entire code for the project but the class Board has been inspired from that video. As the video is a course content, it is not freely available online. For reference, the video is in the course --> Portfolio3 --> Portfolio Project Scope (version of the 20th September 2021)
+
 - ### Read me file credits
+The code was adapted from the readme file from my first and second projects and the sample README.md from [code institute](https://codeinstitute.net/) in the  course --> Portfolio3 --> Portfolio Project Scope (version of the 20th September 2021)
 
 # Acknowledgments
 - My mentor, Nishant Kumar, for guiding me through the project, for giving me feedback to improve the code.

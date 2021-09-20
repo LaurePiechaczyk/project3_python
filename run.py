@@ -5,7 +5,11 @@ import numpy as np
 # --------------- Classes
 class Board:
     """
-    It will print the board.
+    The class Board saves:The type of board with can be Player or Computer,
+    The ships position in an array,
+    The touched ship positions in an array,
+    The missed ship positions in an array,
+    A function to print the boards
     """
     def __init__(self, type):
         self.type = type
@@ -24,13 +28,15 @@ class Board:
         
         # reshape the array into a matrix
         self.board = np.reshape(self.array, (num_rows, num_column))
-        print(f'\n{self.name} board')
+        if self.name:
+            print(f'\n{self.name} board')
         print('\n'.join(' '.join(row) for row in self.board))
 
 
 class GameParticipant(Board):
     """
-    GameParticipant Class
+    GameParticipant Class, Inherits the class Board and save names
+    For future features it can store more data about each player
     """
     def __init__(self, name, type):
         self.name = name
