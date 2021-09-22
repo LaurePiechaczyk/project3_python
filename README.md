@@ -1,23 +1,19 @@
 <h1 align="center"> Project 3 for Code Institute formation | A Battleship - Python terminal game</h1>
 
-# USER Story
-# Deployment (clone)
-#
-
-
 [View the live project here.](https://battleships-laure.herokuapp.com/)
 
 A Battleship is a Python terminal game built as part of a project for the [code institute](https://codeinstitute.net/) (training to become a web developer) to develop and show my skills in Python. 
 
-Players can play against the computer to try find the computer's ships before the computer find the player's ships
+Players can play against the computer to try to find the computer's ships before the computer finds the player's ships.
 
 <h3 align="center"><img src="pictures-read-me/main.png"></h3>
 
 # Table of content
-<details>
-<summary>Open the Table of Contents here</summary>
+<details open>
+<summary>Table of Contents here</summary>
 
 - [How to play](#how-to-play)
+- [User Experience](#user-experience)
 - [Features](#features)
 - [Data Model](#data-model)
 - [Technologies used](#technologies-used)
@@ -28,53 +24,65 @@ Players can play against the computer to try find the computer's ships before th
 
 </details>
 
+
 # How to play
 A Battleship is based on the classic BATTLESHIP game. More information can be found on [Wikipedia](https://en.wikipedia.org/wiki/Battleship_(game)).
 
-In this version, the player enters its name, can choose the size of the board and the number of ships. Then 2 boards are generated, one for the player where ships are shown as @ and one for the computer where the ships are hidden.
+In this version, the player enters his/her name, can choose the size of the board and the number of ships. Then 2 boards are generated, one for the player where ships are shown as @ and one for the computer where the ships are hidden.
 
-The player starts the game by guessing a ship position in the computer board. If a ship is touched, it will be shown with "T" and if ships are missed, it will be shown with "m".
+The player starts the game by guessing the position of a ship on the computer board. If a ship is hit, it will be indicated by "T" and if ships are missed, it will be indicated by "m".
 
-The player and the computer make guess one after the other and the winner is the one who touched first all the ships of the opponent.
+The player and the computer guess one after the other and the winner is the one who hits all the opponent's ships first.
 
 <h3 align="center"><img src="pictures-read-me/start.png"></h3>
 
 
+# User Experience
+## Visitor Goals
+  - As a Visitor, I want to play a game to have fun
+  - As a Visitor, I want to understand the parameters easily
+  - As a Visitor, I want to be informed if I enter an incorrect value and have the option to re-enter the value
+  - As a Visitor, I want to understand why an incorrect value is incorrect and get guidance on how to enter a correct one
+  - As a Visitor, I want to be able to get out of the game easily
+
+
 # Features
 ## Existing Features
-- Player can choose the board size and the number of ships
-    - Before starting the game, the player is asked if she/he wants to customize the game. 
-    - When the answer is yes, the player can choose the size of the board and the number of ships. 
-    - If the answer is no, the player will play with the default setting.
+- The player can choose the size of the board and the number of ships
+    - Before starting the game, the player is asked if he/she wants to customise the game
+    - If the answer is yes, the player can choose the size of the board and the number of ships 
+    - If the answer is no, the player will play with the default setting
 
 - Random board generation
-    - Ships are randomly placed on both the player and the computer boards.
-    - Player can see the positions of his/her ships but not where the computer's ships are.
-- Play against the computer
-- Accepts user input
-- Give the scores
+    - The ships are placed randomly on the player and computer boards
+    - The player can see the position of his ships but not the computer's ships
+- Playing against the computer
+- Accepting user input
+- Giving scores
 - Input validation and error-checking
-    - Maximum board size is set
-    - More boats than the board size could handle is invalid
-    - the same guess cannot be entered twice (for the player and the computer)
+    - There is a maximum board size
+    - More ships than the board size could handle is invalid
+    - The same guess cannot be entered twice (for the player and the computer)
 
 ## Features left to implement
 - Allow the player to position ships themself on the board
-- Ships larger than 1
+- Ships larger than 1x1
+
 
 # Data Model
-2 classes are used (Board and GameParticipant).
+2 classes have been created (Board and GameParticipant)
 
 - The class Board saves:
-    - The type of board with can be Player or Computer
-    - The ships position in an array
-    - The touched ship positions in an array
-    - The missed ship positions in an array
-    - A function to print the board that displays the ships (only for the player board)
+    - The type of board which can be Player or Computer
+    - The position of ships in an array
+    - The position of touched ships in an array
+    - The position of missed ships in an array
+    - A function to print the board
 - The class GameParticipant:
     - Inherits the class Board
     - Saves the name
-    - For future features it could store more data about each player
+    - For future features it could store more data on each player
+
 
 # Technologies used
 ## Languages used
@@ -95,13 +103,30 @@ The player and the computer make guess one after the other and the winner is the
 
 - [PEP8 online checker](http://pep8online.com/) | used to check the python code
 
-## Frameworks and Programs used
 - [Git](https://git-scm.com/) | used as version control system
 
+
 # Testing
-- Passed the code in [PEP8 online checker](http://pep8online.com/checkresult) without showing errors.
-- Invalid data have been entered
-- Tested in local terminal and in Heroku terminal
+## Code validation
+- Passed the code in [PEP8 online checker](http://pep8online.com) without showing errors.
+
+## Manual testing
+The game was tested manually in the local terminal and in the Heroku terminal by playing many games with many different settings and entering incorrect values.
+
+## Testing User Stories
+  - As a Visitor, I want to play a game to have fun.
+    - The game is easy to understand. The player can customise the size of the board and the number of ships to best suit the way the player wants to play and have fun.
+  - As a Visitor, I want to understand the parameters easily.
+    - Settings are displayed.
+    <h3 align="center"><img src="pictures-read-me/settings.png"></h3>
+  - As a Visitor, I want to be informed if I enter an incorrect value and have the option to re-enter the value. As a Visitor, I want to understand why an incorrect value is incorrect and get guidance on how to enter a correct one.
+    - When the player enters an incorrect value, he/she is advised to enter a correct value.
+    <h3 align="center"><img src="pictures-read-me/maxGridSize.png"></h3>
+    <h3 align="center"><img src="pictures-read-me/Has2BInteger.png"></h3>
+    <h3 align="center"><img src="pictures-read-me/2manyShips.png"></h3>
+    <h3 align="center"><img src="pictures-read-me/SettingAfterWrongValue.png"></h3>
+  - As a Visitor, I want to be able to get out of the game easily.
+    - The player can get out of the game after each round.
 
 
 # Deployment
@@ -114,10 +139,19 @@ The project was deployed on Heroku after registering for an account
     - Link the Heroku app to the repository
     - Click on Deploy
 
+## Making a Local Clone
+- Log in to GitHub and locate the GitHub Repository
+- Click the Code drop down menu
+- Either download the ZIP file, unpackage locally and open with IDE OR to clone the repository using HTTPS, under "Clone with HTTPS", copy the link
+- Open Git Bash
+- Change the current working directory to the location where you want the cloned directory to be made
+- Type git clone, and then paste the URL you copied
+- Press Enter. Your local clone will be created
+
 
 # Credits
 ## Idea credits
-The Idea to create from the project example Idea suggested by code institute for the creation of the project. 
+The idea of creating a battleship game came from the sample project idea proposed by Code Institute. 
 
 ## Code credits
 - ### General
@@ -134,8 +168,8 @@ A video made by [code institute](https://codeinstitute.net/) that illustrates a 
 The code was adapted from the readme file from my first and second projects and the sample README.md from [code institute](https://codeinstitute.net/) in the  course --> Portfolio3 --> Portfolio Project Scope (version of the 20th September 2021)
 
 # Acknowledgments
-- My mentor, Nishant Kumar, for guiding me through the project, for giving me feedback to improve the code.
+- My mentor, Nishant Kumar, for guiding me through the project, for giving me feedback to improve the code
 
-- The Slack community for clarifying certain concepts, sharing tips and links.
+- The Slack community for clarifying certain concepts, sharing tips and links
 
-- The tutors in Code institutes for helping with the codes.
+- The tutors in Code institutes for helping with the codes

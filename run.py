@@ -34,10 +34,10 @@ class Board:
         # reshape the array into a matrix
         self.board = np.reshape(self.array, (num_rows, num_column))
         if self.name:
-            print(f'\n{self.name} board')
+            print(f"\n{self.name} board")
         else:
-            print("This baord has not been attributed to any game participant")
-        print('\n'.join(' '.join(row) for row in self.board))
+            print("This board has not been attributed to any game participant")
+        print("\n".join(" ".join(row) for row in self.board))
 
 
 class GameParticipant(Board):
@@ -52,6 +52,14 @@ class GameParticipant(Board):
 
 
 # --------------- Functions
+def Welcome_the_player_and_get_name():
+    print("-" * 55)
+    print("Welcome to BATTLESHIPS!!")
+    print("-" * 55)
+    name = input("Please enter your name:\n")
+    return name
+
+
 def player_game_customisation(num_rows, num_column, number_boats):
     while True:
         try:
@@ -84,17 +92,28 @@ def show_game_settings():
     print("-" * 55)
     print(
         f"The settings are: \nNumber of rows = {num_rows}"
-        " \nNumber of columns = {num_column} \nNumber of ships: {number_boats}"
+        f"\nNumber of columns = {num_column} \nNumber of ships: {number_boats}"
         )
     print("Top left corner is row: 1, col: 1")
     print("-" * 55)
+
+
+def first_time_show_boards():
+    print("-" * 55)
+    print(
+        "Your boats are represented by @."
+        "\nT = touched ships \nm = missed.\nGood luck and have fun :)"
+        )
+    print("-" * 55)
+    player.print_board()
+    computer.print_board()
 
 
 def show_scores():
     print("-" * 55)
     player_score = len(computer.touched_boats_position)
     computer_score = len(player.touched_boats_position)
-    print(f'The score is:\n{name}:{player_score} \nComputer:{computer_score} ')
+    print(f"The score is:\n{name}:{player_score} \nComputer:{computer_score}")
     print("-" * 55)
 
 
@@ -134,7 +153,7 @@ def player_guess():
             num_column * (player_row_choice-1)
             )
 
-    print(f'{name} guessed: ({player_row_choice };{player_column_choice})')
+    print(f"{name} guessed: ({player_row_choice };{player_column_choice})")
     return player_choice_in_array
 
 
@@ -160,8 +179,8 @@ def computer_guess():
         )[1][0]+1  # for column
 
     print(
-        'Computer guessed:'
-        f'({computer_row_choice};{computer_column_choice})'
+        "Computer guessed:"
+        f"({computer_row_choice};{computer_column_choice})"
         )
     return computer_choice_in_array
 
@@ -212,20 +231,13 @@ def run_game():
 
     next_round_start = (input(
         "Do you want to continue?"
-        " \nClick on ANY KEY to continue \nto quit click n + Enter \n")
+        "\nClick on ANY KEY to continue \nto quit click n + Enter \n")
         )
     if next_round_start in ["N", "n", "No", "no"]:
         quit()
     player.print_board()
     computer.print_board()
     run_game()
-
-def Welcome_the_player_and_get_name():
-    print("-" * 55)
-    print("Welcome to BATTLESHIPS!!")
-    print("-" * 55)
-    name = input("Please enter your name:\n")
-    return name
 
 
 # -------------------  Game Start
@@ -235,8 +247,8 @@ name = Welcome_the_player_and_get_name()
 
 # If player wants, let him/her choose values for board size and number of ships
 constumisation = input(
-    f'Hello {name}, do you want to choose your number of ships and grid size?'
-    ' \nClick Y + Enter \nOtherwise click Enter to play with the default\n'
+    f"Hello {name}, do you want to choose your number of ships and grid size?"
+    "\nClick Y + Enter \nOtherwise click Enter to play with the default\n"
     )
 if constumisation in ["Y", "y", "Yes", "yes"]:
     num_rows, num_column, number_boats = player_game_customisation(
@@ -261,14 +273,7 @@ player = GameParticipant(name, "player")
 computer = GameParticipant("computer", "computer")
 
 
-# first time to show the grids
-print("-" * 55)
-print(
-    'Your boats are represented by @.'
-    '\nT = touched ships \nm = missed.\nGood luck and have fun :)'
-    )
-print("-" * 55)
-player.print_board()
-computer.print_board()
+# first time to show the boards
+first_time_show_boards()
 
 run_game()
