@@ -2,6 +2,12 @@ import random
 import numpy as np
 
 
+# ------------- Default values for board size and number of ships
+num_column = 5
+num_rows = 4
+number_boats = 6
+
+
 # --------------- Classes
 class Board:
     """
@@ -25,11 +31,12 @@ class Board:
             place_data_in_board(self.array, self.boats_position, "@")
         place_data_in_board(self.array, self.touched_boats_position, "T")
         place_data_in_board(self.array, self.missed_boats_position, "m")
-        
         # reshape the array into a matrix
         self.board = np.reshape(self.array, (num_rows, num_column))
         if self.name:
             print(f'\n{self.name} board')
+        else:
+            print("This baord has not been attributed to any game participant")
         print('\n'.join(' '.join(row) for row in self.board))
 
 
@@ -62,11 +69,8 @@ def player_game_customisation(num_rows, num_column, number_boats):
             while number_boats > (num_rows * num_column) or number_boats < 1:
                 print("You might have a bit too much boats (or no boat)")
                 number_boats = int(input("type your number of boats:\n"))
-
             return (num_rows, num_column, number_boats)
 
-            if type(num_rows, num_column, number_boats) == int:
-                break
         except ValueError:
             print("Values have to be integers.")
 
@@ -167,13 +171,11 @@ def check_if_winner():
     computer_score = len(player.touched_boats_position)
     if player_score == number_boats or computer_score == number_boats:
         if player_score > computer_score:
-            show_scores()
             print("\nYou won")
-            quit()
         else:
-            show_scores()
             print("\nComputer won")
-            quit()
+        show_scores()
+        quit()
 
 
 def check_if_ship_touched_missed(
@@ -218,20 +220,18 @@ def run_game():
     computer.print_board()
     run_game()
 
+def Welcome_the_player_and_get_name():
+    print("-" * 55)
+    print("Welcome to BATTLESHIPS!!")
+    print("-" * 55)
+    name = input("Please enter your name:\n")
+    return name
 
-# --------------------- Game Start
 
-# present the game and welcome the player
-print("-" * 55)
-print("Welcome to BATTLESHIPS!!")
-print("-" * 55)
+# -------------------  Game Start
+# present the game, welcome the player, get name
+name = Welcome_the_player_and_get_name()
 
-name = input("Please enter your name:\n")
-
-# Set default values for board size and number of ships
-num_column = 5
-num_rows = 4
-number_boats = 6
 
 # If player wants, let him/her choose values for board size and number of ships
 constumisation = input(

@@ -1,5 +1,9 @@
 <h1 align="center"> Project 3 for Code Institute formation | A Battleship - Python terminal game</h1>
 
+# USER Story
+# Deployment (clone)
+#
+
 
 [View the live project here.](https://battleships-laure.herokuapp.com/)
 
@@ -20,7 +24,7 @@ Players can play against the computer to try find the computer's ships before th
 - [Testing](#testing)
 - [Deployment](#deployment)
 - [Credits](#credits)
-- [Acknowledgments](#acknowlegments)
+- [Acknowledgments](#acknowledgments)
 
 </details>
 
@@ -89,7 +93,7 @@ The player and the computer make guess one after the other and the winner is the
 
 - [DeepL](https://www.deepl.com/) | used to translate words from French to English and to write the content of the website and the 'Read me' file
 
-- [PEP8 online checker](http://pep8online.com/checkresult) | used to check the python code
+- [PEP8 online checker](http://pep8online.com/) | used to check the python code
 
 ## Frameworks and Programs used
 - [Git](https://git-scm.com/) | used as version control system
