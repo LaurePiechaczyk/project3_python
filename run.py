@@ -54,7 +54,7 @@ class GameParticipant(Board):
 # --------------- Functions
 def Welcome_the_player_and_get_name():
     print("-" * 55)
-    print("Welcome to BATTLESHIPS!!")
+    print("Welcome to 'A BATTLESHIP'!!")
     print("-" * 55)
     name = input("Please enter your name:\n")
     return name
