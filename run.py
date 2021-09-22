@@ -71,12 +71,12 @@ def player_game_customisation(num_rows, num_column, number_boats):
             num_column = int(input("type your number of columns:\n"))
             while num_column > 13 or num_column < 1:
                 print("Please use a value between 1 and 13")
-                num_column = int(input("type your number of column:\n"))
+                num_column = int(input("type your number of columns:\n"))
 
-            number_boats = int(input("type your number of boats:\n"))
+            number_boats = int(input("type your number of ships:\n"))
             while number_boats > (num_rows * num_column) or number_boats < 1:
-                print("You might have a bit too much boats (or no boat)")
-                number_boats = int(input("type your number of boats:\n"))
+                print("You might have a bit too much ships (or no ship)")
+                number_boats = int(input("type your number of ships:\n"))
             return (num_rows, num_column, number_boats)
 
         except ValueError:
@@ -101,8 +101,8 @@ def show_game_settings():
 def first_time_show_boards():
     print("-" * 55)
     print(
-        "Your boats are represented by @."
-        "\nT = touched ships \nm = missed.\nGood luck and have fun :)"
+        "Your ships are represented by @."
+        "\nT = touched ships \nm = missed \nGood luck and have fun :)"
         )
     print("-" * 55)
     player.print_board()
