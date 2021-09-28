@@ -11,11 +11,12 @@ number_boats = 6
 # --------------- Classes
 class Board:
     """
-    The class Board saves:The type of board with can be Player or Computer,
+    The class Board saves:
+    The type of board (player or Computer),
     The ships position in an array,
     The touched ship positions in an array,
     The missed ship positions in an array,
-    A function to print the boards
+    A function to print the board
     """
     def __init__(self, type):
         self.type = type
@@ -42,8 +43,8 @@ class Board:
 
 class GameParticipant(Board):
     """
-    GameParticipant Class, Inherits the class Board and save names
-    For future features it can store more data about each player
+    GameParticipant Class, Inherits the class Board and save names.
+    For future features it can store more data about each player.
     """
     def __init__(self, name, type):
         self.name = name

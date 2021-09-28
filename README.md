@@ -91,13 +91,15 @@ The player and the computer guess one after the other and the winner is the one 
 ## Frameworks and Programs used
 - [Gitpod](https://gitpod.io/workspaces) | used to code, commit to git and push the codes to github
 
-- [GitHub](https://github.com/) | used to store the project code, show it and deploy the website
+- [GitHub](https://github.com/) | used to store the project code and link it to Heroku for deployement
+
+- [Heroku](https://www.heroku.com/) | used to deploy the project
 
 - [Powerpoint](https://simple.wikipedia.org/wiki/Microsoft_PowerPoint) | used to create images from screenshots
 
 - [Word](https://en.wikipedia.org/wiki/Microsoft_Word) | used to correct the grammar
 
-- [am I responsive?](http://ami.responsivedesign.is/) | used to look at the responsiveness of the website 
+- [am I responsive?](http://ami.responsivedesign.is/) | used to get a picture of the game
 
 - [DeepL](https://www.deepl.com/) | used to translate words from French to English and to write the content of the website and the 'Read me' file
 
